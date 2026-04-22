@@ -1134,10 +1134,10 @@ body {
   -webkit-user-drag: none;
 }
 
-/* Изображения/эмодзи внутри карточек — тоже не перетаскиваются, не выделяются */
-.product__image,
-.product__name,
-.product__chip {
+/* Вся начинка карточек — не выделяется при drag-свайпе и не тянется как native drag.
+   Селектор ".products__track *" ловит все вложенные элементы, т.к. user-select не наследуется
+   в стандартном режиме CSS. */
+.products__track * {
   -webkit-user-drag: none;
   user-select: none;
   -webkit-user-select: none;
