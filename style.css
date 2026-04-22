@@ -1128,6 +1128,19 @@ body {
   /* скрываем нативный скроллбар */
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
+  /* выключаем выделение текста и native drag — чтобы drag-to-scroll не конфликтовал с браузером */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Изображения/эмодзи внутри карточек — тоже не перетаскиваются, не выделяются */
+.product__image,
+.product__name,
+.product__chip {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .products__track::-webkit-scrollbar {

@@ -200,52 +200,73 @@ if (productsTrack && productsDots.length > 0) {
 
 
   // ---- Drag-to-scroll мишкою (десктоп) ----
-  // Коли юзер тисне і тягне мишкою — лента скролиться, як при свайпі на телефоні.
-  // Складність: треба не плутати перетягування з кліком по лінку всередині карточки.
+  // Ключові моменти чистого drag-to-scroll без бібліотек:
+  // 1. preventDefault() на mousedown — вимикає native drag (фото/текст перестають "липнути" до курсора).
+  // 2. mousemove/mouseup слухаємо на document, не на треку — щоб drag не обривався, коли курсор залишає стрічку.
+  // 3. requestAnimationFrame батчить апдейти scrollLeft — скрол плавний, без ривків.
+  // 4. scroll-snap-type = none під час перетягування — інакше браузер намагається снапити в процесі.
 
-  let isMouseDown = false;
+  let isDragging = false;
   let dragStartX = 0;
   let dragStartScroll = 0;
+  let pendingDx = 0;
+  let rafScheduled = false;
   let hasDragged = false;
 
-  // При мishdown запам'ятовуємо старт
-  productsTrack.addEventListener('mousedown', (e) => {
-    // Якщо юзер натиснув прямо по лінку/кнопці — не перехоплюємо
+  const onMouseDown = (e) => {
+    // Натиснув прямо по лінку/кнопці — не перехоплюємо, хай відкриває лінк нормально
     if (e.target.closest('a, button')) return;
 
-    isMouseDown = true;
+    isDragging = true;
     hasDragged = false;
-    dragStartX = e.pageX;
+    dragStartX = e.clientX;
     dragStartScroll = productsTrack.scrollLeft;
+    pendingDx = 0;
 
-    // Під час перетягування тимчасово вимикаємо snap — щоб не було "дергання" на кожному кроці
+    // Вимикаємо snap і smooth-scroll на час перетягування
     productsTrack.style.scrollSnapType = 'none';
-  });
+    productsTrack.style.scrollBehavior = 'auto';
 
-  // Під час руху — рахуємо зміщення і скролимо вручну
-  productsTrack.addEventListener('mousemove', (e) => {
-    if (!isMouseDown) return;
-
-    const dx = e.pageX - dragStartX;
-    // 5 пікселів — поріг "це вже точно drag, а не випадковий мishдвиг"
-    if (Math.abs(dx) > 5) {
-      hasDragged = true;
-      e.preventDefault();
-      productsTrack.scrollLeft = dragStartScroll - dx;
-    }
-  });
-
-  // Завершення перетягування — повертаємо snap, і він сам доїде до найближчої карточки
-  const endDrag = () => {
-    if (!isMouseDown) return;
-    isMouseDown = false;
-    productsTrack.style.scrollSnapType = '';
+    // Прибиваємо native drag (картинки/текст) — ключовий момент, без цього не "відпускає"
+    e.preventDefault();
   };
 
-  productsTrack.addEventListener('mouseup', endDrag);
-  productsTrack.addEventListener('mouseleave', endDrag);
+  const onMouseMove = (e) => {
+    if (!isDragging) return;
 
-  // Якщо юзер перетягнув — блокуємо click, що прилетить після mouseup (інакше браузер відкриє лінк)
+    pendingDx = e.clientX - dragStartX;
+
+    if (Math.abs(pendingDx) > 5) {
+      hasDragged = true;
+    }
+
+    // requestAnimationFrame — оновлення скроллу синхронізоване з кадрами браузера, без дерганки
+    if (!rafScheduled) {
+      rafScheduled = true;
+      requestAnimationFrame(() => {
+        if (isDragging && hasDragged) {
+          productsTrack.scrollLeft = dragStartScroll - pendingDx;
+        }
+        rafScheduled = false;
+      });
+    }
+  };
+
+  const onMouseUp = () => {
+    if (!isDragging) return;
+    isDragging = false;
+
+    // Повертаємо snap — браузер сам доведе до найближчої карточки
+    productsTrack.style.scrollSnapType = '';
+    productsTrack.style.scrollBehavior = '';
+  };
+
+  productsTrack.addEventListener('mousedown', onMouseDown);
+  // document, не productsTrack: drag не обривається якщо курсор вийшов за межі стрічки
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+
+  // Якщо юзер перетягнув — блокуємо click, що прилетить після mouseup (інакше браузер відкриє лінк карточки)
   productsTrack.addEventListener('click', (e) => {
     if (hasDragged) {
       e.preventDefault();
