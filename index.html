@@ -111,6 +111,82 @@
     </div>
   </section>
 
+  <!-- Продукція — горизонтальная лента со snap-scroll (Apple-style) -->
+  <section class="products" id="products">
+    <div class="products__head">
+      <span class="products__chip">Продукція</span>
+      <h2 class="products__title">Повний цикл <em>деревообробки</em></h2>
+      <p class="products__subtitle">П'ять напрямків — від плит до брикетів. Все під одним стандартом якості.</p>
+    </div>
+
+    <div class="products__track">
+
+      <article class="product">
+        <div class="product__image product__image--dvp">🪵</div>
+        <div class="product__body">
+          <span class="product__chip">Від 2.5 мм</span>
+          <h3 class="product__name">ДВП</h3>
+          <p class="product__desc">Деревоволокнисті плити твердого типу HB. Основний продукт компанії.</p>
+          <a href="pages/dvp.html" class="product__link">Детальніше →</a>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product__image product__image--dvpo">💧</div>
+        <div class="product__body">
+          <span class="product__chip">Водостійкий</span>
+          <h3 class="product__name">ДВПО</h3>
+          <p class="product__desc">Оліфований ДВП — підвищена стійкість до вологи та температури.</p>
+          <a href="pages/dvpo.html" class="product__link">Детальніше →</a>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product__image product__image--fanera">📋</div>
+        <div class="product__body">
+          <span class="product__chip">Багатошарова</span>
+          <h3 class="product__name">Фанера</h3>
+          <p class="product__desc">Клеєна фанера для меблевого виробництва і будівництва.</p>
+          <a href="pages/fanera.html" class="product__link">Детальніше →</a>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product__image product__image--pilomat">📏</div>
+        <div class="product__body">
+          <span class="product__chip">Суха, калібрована</span>
+          <h3 class="product__name">Пиломатеріали</h3>
+          <p class="product__desc">Дошка, брус, рейка за специфікацією замовника.</p>
+          <a href="pages/pilomaterialy.html" class="product__link">Детальніше →</a>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product__image product__image--brykety">🔥</div>
+        <div class="product__body">
+          <span class="product__chip">RUF-стандарт</span>
+          <h3 class="product__name">Паливні брикети</h3>
+          <p class="product__desc">Чисте біопаливо з відходів власного виробництва.</p>
+          <a href="pages/brykety.html" class="product__link">Детальніше →</a>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Управление лентой — стрелки + точки-индикаторы прогресса -->
+    <div class="products__controls">
+      <button class="products__arrow products__arrow--prev" aria-label="Попередня картка" type="button">‹</button>
+      <div class="products__dots">
+        <span class="products__dot products__dot--active"></span>
+        <span class="products__dot"></span>
+        <span class="products__dot"></span>
+        <span class="products__dot"></span>
+        <span class="products__dot"></span>
+      </div>
+      <button class="products__arrow products__arrow--next" aria-label="Наступна картка" type="button">›</button>
+    </div>
+  </section>
+
   <!-- Група компаній -->
   <section class="group" id="group">
     <div class="group__inner">
@@ -123,32 +199,32 @@
 
       <div class="group__grid">
 
-        <a href="https://uniplyt.com.ua/" target="_blank" rel="noopener" class="group-card">
-          <div class="group-card__logo group-card__logo--uniplyt">U</div>
+        <a href="https://uniplyt.com.ua/" target="_blank" rel="noopener" class="group-card group-card--uniplyt">
+          <div class="group-card__logo">U</div>
           <h3 class="group-card__name">Uniplyt</h3>
           <p class="group-card__desc">Лідер з виробництва ДВП в Україні</p>
         </a>
 
-        <a href="https://unibruk.com.ua/" target="_blank" rel="noopener" class="group-card">
-          <div class="group-card__logo group-card__logo--unibruk">UB</div>
+        <a href="https://unibruk.com.ua/" target="_blank" rel="noopener" class="group-card group-card--unibruk">
+          <div class="group-card__logo">UB</div>
           <h3 class="group-card__name">Unibruk</h3>
           <p class="group-card__desc">Тротуарна плитка й бордюри на обладнанні HESS GROUP</p>
         </a>
 
-        <a href="https://gorgania.com.ua/" target="_blank" rel="noopener" class="group-card">
-          <div class="group-card__logo group-card__logo--gorgania">G</div>
+        <a href="https://gorgania.com.ua/" target="_blank" rel="noopener" class="group-card group-card--gorgania">
+          <div class="group-card__logo">G</div>
           <h3 class="group-card__name">Gorgania</h3>
           <p class="group-card__desc">Міжкімнатні двері з серця Карпат</p>
         </a>
 
-        <a href="https://kartram.com.ua/" target="_blank" rel="noopener" class="group-card">
-          <div class="group-card__logo group-card__logo--kartram">KT</div>
+        <a href="https://kartram.com.ua/" target="_blank" rel="noopener" class="group-card group-card--kartram">
+          <div class="group-card__logo">KT</div>
           <h3 class="group-card__name">Карпатський Трамвай</h3>
           <p class="group-card__desc">Єдина діюча вузькоколійна залізниця в Україні</p>
         </a>
 
-        <a href="pages/kompaniya/social.html" class="group-card">
-          <div class="group-card__logo group-card__logo--social">♥</div>
+        <a href="https://vyhodskyikrai.com/" target="_blank" rel="noopener" class="group-card group-card--social">
+          <div class="group-card__logo">♥</div>
           <h3 class="group-card__name">Соціальні ініціативи</h3>
           <p class="group-card__desc">Благодійність, підтримка громади та ЗСУ</p>
         </a>

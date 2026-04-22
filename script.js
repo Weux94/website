@@ -99,6 +99,93 @@ const observer = new IntersectionObserver((entries) => {
 statNumbers.forEach((el) => observer.observe(el));
 
 
+// ---------- Лента продуктів на головній (snap-scroll + активна точка) ----------
+
+// Знаходимо ленту і точки — якщо ми не на головній, їх не буде
+const productsTrack = document.querySelector('.products__track');
+const productsDots = document.querySelectorAll('.products__dot');
+
+if (productsTrack && productsDots.length > 0) {
+  const productCards = productsTrack.querySelectorAll('.product');
+  const prevArrow = document.querySelector('.products__arrow--prev');
+  const nextArrow = document.querySelector('.products__arrow--next');
+
+  // Поточний активний індекс — зберігаємо, щоб стрілки знали куди крутити
+  let activeIndex = 0;
+
+  // Скрол до карточки по індексу
+  const scrollToCard = (index) => {
+    if (index < 0 || index >= productCards.length) return;
+    productCards[index].scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center',
+    });
+  };
+
+  // Оновлюємо стан стрілок — на краях ленти відповідна стрілка неактивна
+  const updateArrowsState = () => {
+    if (prevArrow) prevArrow.disabled = activeIndex === 0;
+    if (nextArrow) nextArrow.disabled = activeIndex === productCards.length - 1;
+  };
+
+  // При скроллі — визначаємо яка карточка в центрі viewport і підсвічуємо відповідну точку
+  const updateActiveDot = () => {
+    const trackRect = productsTrack.getBoundingClientRect();
+    const trackCenter = trackRect.left + trackRect.width / 2;
+
+    let closestIndex = 0;
+    let closestDistance = Infinity;
+
+    productCards.forEach((card, i) => {
+      const cardRect = card.getBoundingClientRect();
+      const cardCenter = cardRect.left + cardRect.width / 2;
+      const distance = Math.abs(cardCenter - trackCenter);
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = i;
+      }
+    });
+
+    activeIndex = closestIndex;
+
+    productsDots.forEach((dot, i) => {
+      dot.classList.toggle('products__dot--active', i === activeIndex);
+    });
+
+    updateArrowsState();
+  };
+
+  // Слухаємо скролл ленти (throttle через requestAnimationFrame для плавності)
+  let scrollRaf = null;
+  productsTrack.addEventListener('scroll', () => {
+    if (scrollRaf) return;
+    scrollRaf = requestAnimationFrame(() => {
+      updateActiveDot();
+      scrollRaf = null;
+    });
+  });
+
+  // Клік по точці — скролимо ленту до відповідної карточки
+  productsDots.forEach((dot, i) => {
+    dot.style.cursor = 'pointer';
+    dot.addEventListener('click', () => scrollToCard(i));
+  });
+
+  // Стрілки — скрол до попередньої/наступної
+  if (prevArrow) {
+    prevArrow.addEventListener('click', () => scrollToCard(activeIndex - 1));
+  }
+  if (nextArrow) {
+    nextArrow.addEventListener('click', () => scrollToCard(activeIndex + 1));
+  }
+
+  // Початковий стан стрілок — попередня неактивна, бо стартуємо з першої карточки
+  updateArrowsState();
+}
+
+
 // ---------- Crossfade слайдер (сторінка проєктів) ----------
 
 // Перевіряємо чи ми на сторінці проєктів

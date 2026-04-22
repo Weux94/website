@@ -1,8 +1,11 @@
 /* ===== Кольори бренду Uniplyt ===== */
+/* Палитра из фирменных цветов Uniplyt + 1 промежуточный оттенок */
 :root {
-  --main-dark-green: #1b4332;
-  --main-green: #2d6a4f;
-  --main-light-green: #d8f3dc;
+  --main-dark-green: #00513b;      /* брендовый deep — фоны секций, текст */
+  --main-green: #0c6b44;           /* промежуточный средний — блок "Група компаній" */
+  --main-bright-green: #40ab35;    /* брендовый яркий — акценты, em, hover */
+  --main-lime: #95c11f;            /* брендовый лайм — сигнатурный pop (цифры в hero) */
+  --main-light-green: #e8f5d8;     /* светлый брендово-тонированный — для фонов чипов, кнопок */
   --main-black: #333333;
   --main-white: #ffffff;
 }
@@ -232,7 +235,7 @@ body {
   flex-direction: column;
   justify-content: center;
   padding: 40px 24px;
-  background: linear-gradient(160deg, var(--main-dark-green) 0%, var(--main-green) 40%, #40916c 100%);
+  background-color: var(--main-dark-green);
   color: #fff;
 }
 
@@ -308,14 +311,14 @@ body {
 .stats__number {
   font-size: 36px;
   font-weight: 800;
-  color: var(--main-light-green);
+  color: var(--main-white);
   line-height: 1;
 }
 
 .stats__unit {
   font-size: 14px;
   font-weight: 600;
-  color: var(--main-light-green);
+  color: var(--main-white);
   margin-top: 2px;
 }
 
@@ -1053,10 +1056,222 @@ body {
   display: none;
 }
 
+/* ===== Продукція — горизонтальна лента со snap-scroll ===== */
+.products {
+  padding: 48px 0 40px;
+  /* cream fon разбивает зелёный "сендвич" hero + group */
+  background-color: #fafaf7;
+}
+
+.products__head {
+  padding: 0 16px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.products__chip {
+  padding: 6px 12px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--main-dark-green);
+  background-color: var(--main-light-green);
+  border-radius: 20px;
+}
+
+.products__title {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--main-dark-green);
+}
+
+.products__title em {
+  font-style: italic;
+  color: var(--main-green);
+}
+
+.products__subtitle {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555;
+  max-width: 420px;
+}
+
+/* Лента — горизонтальный скролл со snap */
+.products__track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  /* отступы по краям чтобы активная карточка центрировалась */
+  padding: 0 16px 8px;
+  /* скрываем нативный скроллбар */
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.products__track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Карточка продукта */
+.product {
+  /* 85% ширины viewport = видно край следующей = явный сигнал "крути дальше" */
+  flex: 0 0 85%;
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--main-white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.product__image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* большая квадратная область под фото (пока эмодзи) */
+  aspect-ratio: 1 / 1;
+  font-size: 96px;
+  /* лёгкий grayscale для премиального "каталожного" вида */
+  filter: grayscale(0.3);
+}
+
+/* Разные оттенки фона под плейсхолдеры — чтобы карточки различались */
+.product__image--dvp { background-color: #e8efe0; }
+.product__image--dvpo { background-color: #d9e6eb; }
+.product__image--fanera { background-color: #ede3cf; }
+.product__image--pilomat { background-color: #e6ddcb; }
+.product__image--brykety { background-color: #ead9c8; }
+
+.product__body {
+  padding: 20px 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.product__chip {
+  align-self: flex-start;
+  padding: 4px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--main-dark-green);
+  background-color: var(--main-light-green);
+  border-radius: 20px;
+}
+
+.product__name {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--main-dark-green);
+  letter-spacing: -0.5px;
+}
+
+.product__desc {
+  font-size: 14px;
+  line-height: 1.55;
+  color: #555;
+}
+
+.product__link {
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 4px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--main-dark-green);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0, 81, 59, 0.3);
+  transition: border-color 0.2s;
+}
+
+.product__link:active {
+  border-bottom-color: var(--main-dark-green);
+}
+
+/* Ряд управления лентой — стрелки + точки, центрировано */
+.products__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 28px;
+  padding: 0 16px;
+}
+
+/* Круглая стрелка — тонкий контур, на hover подсветка */
+.products__arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 81, 59, 0.25);
+  background-color: transparent;
+  color: var(--main-dark-green);
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  /* шрифт стрелки ‹/› поднимается чуть выше — выровним оптически */
+  padding-bottom: 3px;
+  transition: background-color 0.2s, border-color 0.2s, opacity 0.2s;
+}
+
+.products__arrow:hover {
+  background-color: rgba(0, 81, 59, 0.08);
+  border-color: rgba(0, 81, 59, 0.45);
+}
+
+.products__arrow:active {
+  transform: scale(0.94);
+}
+
+/* Неактивная стрелка на краю ленты — полупрозрачная, не кликается */
+.products__arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Точки-индикаторы — показывают текущую карточку в ленте */
+.products__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.products__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #d0d0cb;
+  transition: background-color 0.3s, width 0.3s;
+}
+
+.products__dot--active {
+  /* активная точка удлиняется — Apple-приём */
+  background-color: var(--main-dark-green);
+  width: 24px;
+  border-radius: 4px;
+}
+
 /* ===== Група компаній ===== */
 .group {
   padding: 48px 16px;
-  background-color: var(--main-dark-green);
+  background-color: var(--main-green);
   color: var(--main-white);
 }
 
@@ -1094,7 +1309,7 @@ body {
 
 .group__title em {
   font-style: italic;
-  color: var(--main-light-green);
+  color: var(--main-white);
 }
 
 .group__subtitle {
@@ -1110,23 +1325,22 @@ body {
   gap: 14px;
 }
 
-/* Карточка направления */
+/* Карточка направления — единый тёмный фон, весь текст белый */
 .group-card {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 16px;
   padding: 16px 18px;
-  background-color: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(216, 243, 220, 0.12);
+  background-color: var(--main-dark-green);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   text-decoration: none;
-  transition: background-color 0.2s, transform 0.2s, border-color 0.2s;
+  transition: transform 0.2s, filter 0.2s;
 }
 
 .group-card:active {
   transform: scale(0.98);
-  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Заглушка под логотип — цветной квадрат с инициалами */
@@ -1144,24 +1358,8 @@ body {
   /* цвет фона задаётся модификатором */
 }
 
-.group-card__logo--uniplyt {
-  background-color: var(--main-green);
-}
-
-.group-card__logo--unibruk {
-  background-color: #c0392b;
-}
-
-.group-card__logo--gorgania {
-  background-color: #8e6f47;
-}
-
-.group-card__logo--kartram {
-  background-color: #34495e;
-}
-
-.group-card__logo--social {
-  background-color: #e74c8c;
+/* Все карточки единого стиля — базовые правила выше. Только Соціалка с увеличенным сердцем. */
+.group-card--social .group-card__logo {
   font-size: 28px;
 }
 
@@ -1473,6 +1671,43 @@ body {
     margin-top: 2px;
   }
 
+  /* Продукція — на планшете карточки сужаются, видно 2 сразу + peek */
+  .products {
+    padding: 72px 0 56px;
+  }
+
+  .products__head {
+    padding: 0 40px 36px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .products__title {
+    font-size: 30px;
+  }
+
+  .products__subtitle {
+    font-size: 15px;
+    max-width: 560px;
+  }
+
+  .products__track {
+    padding: 0 40px 8px;
+    gap: 20px;
+  }
+
+  .product {
+    flex: 0 0 48%;
+  }
+
+  .product__name {
+    font-size: 24px;
+  }
+
+  .product__desc {
+    font-size: 15px;
+  }
+
   /* Група компаній — больше воздуха, заголовок крупнее */
   .group {
     padding: 80px 40px;
@@ -1748,6 +1983,33 @@ body {
     font-size: 10px;
   }
 
+  /* Продукція — на десктопе 3 карточки видно, лента остаётся (продолжает работать swipe/drag) */
+  .products {
+    padding: 100px 0 72px;
+  }
+
+  .products__head {
+    padding: 0 60px 44px;
+    max-width: 1200px;
+  }
+
+  .products__title {
+    font-size: 36px;
+  }
+
+  .products__track {
+    padding: 0 60px 8px;
+    gap: 24px;
+  }
+
+  .product {
+    flex: 0 0 32%;
+  }
+
+  .product__body {
+    padding: 24px 22px 26px;
+  }
+
   /* Група компаній — 5 колонок в один ряд на десктопе */
   .group {
     padding: 100px 60px;
@@ -1782,9 +2044,9 @@ body {
   }
 
   .group-card:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(216, 243, 220, 0.3);
+    /* только lift — брендовый цвет карточки сохраняем */
     transform: translateY(-4px);
+    filter: brightness(1.08);
   }
 
   .group-card__logo {
