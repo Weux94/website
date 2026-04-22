@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Наші проєкти — Uniplyt</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <!-- Шапка -->
+  <header class="header">
+    <button class="burger" aria-label="Меню">
+      <span class="burger__line"></span>
+      <span class="burger__line"></span>
+      <span class="burger__line"></span>
+    </button>
+    <a href="../index.html" class="header__title">Uniplyt</a>
+    <select class="lang">
+      <option value="uk">UA</option>
+      <option value="en">EN</option>
+    </select>
+  </header>
+
+  <!-- Бургер-меню -->
+  <nav class="menu">
+    <ul class="menu__list">
+      <li class="menu__item menu__item--has-sub">
+        <button class="menu__toggle">
+          <span>Продукція</span>
+          <span class="menu__icon">+</span>
+        </button>
+        <ul class="menu__sub">
+          <li><a href="dvp.html" class="menu__sublink">ДВП</a></li>
+          <li><a href="dvpo.html" class="menu__sublink">ДВПО</a></li>
+          <li><a href="fanera.html" class="menu__sublink">Фанера</a></li>
+          <li><a href="pilomaterialy.html" class="menu__sublink">Пиломатеріали</a></li>
+          <li><a href="brykety.html" class="menu__sublink">Паливні брикети</a></li>
+          <li><a href="dveri.html" class="menu__sublink">Двері</a></li>
+        </ul>
+      </li>
+      <li class="menu__item menu__item--has-sub">
+        <button class="menu__toggle">
+          <span>Компанія</span>
+          <span class="menu__icon">+</span>
+        </button>
+        <ul class="menu__sub">
+          <li><a href="kompaniya/foto.html" class="menu__sublink">Фото виробництва</a></li>
+          <li><a href="kompaniya/social.html" class="menu__sublink">Соціальні ініціативи</a></li>
+          <li><a href="kompaniya/lisokombinat.html" class="menu__sublink">Вигодський лісокомбінат</a></li>
+          <li><a href="kompaniya/finance.html" class="menu__sublink">Фінансова звітність</a></li>
+          <li><a href="kompaniya/yakist.html" class="menu__sublink">Система якості</a></li>
+        </ul>
+      </li>
+      <li class="menu__item menu__item--has-sub">
+        <button class="menu__toggle">
+          <span>Екологія</span>
+          <span class="menu__icon">+</span>
+        </button>
+        <ul class="menu__sub">
+          <li><a href="syrovyna.html" class="menu__sublink">Сировина</a></li>
+          <li><a href="bezpeka.html" class="menu__sublink">Безпека матеріалів</a></li>
+        </ul>
+      </li>
+      <li class="menu__item">
+        <a href="sertyfikaty.html" class="menu__link">Сертифікати</a>
+      </li>
+      <li class="menu__item">
+        <a href="projects.html" class="menu__link">Наші проекти</a>
+      </li>
+      <li class="menu__item">
+        <a href="zakupivli.html" class="menu__link">Закупівлі</a>
+      </li>
+      <li class="menu__item">
+        <a href="contacts.html" class="menu__link">Контакти</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="overlay"></div>
+
+  <!-- Заголовок сторінки -->
+  <section class="page-hero">
+    <h1 class="page-hero__title">Наші проєкти</h1>
+    <p class="page-hero__subtitle">Група компаній Uniplyt</p>
+  </section>
+
+  <!-- Crossfade слайдер -->
+  <section class="cf-slider">
+    <div class="cf-slider__slides">
+      <div class="cf-slider__slide cf-slider__slide--active" style="background-color: #2d6a4f;"
+           data-name="Uniplyt" data-url="https://uniplyt.com.ua/"
+           data-desc="Лідер з виробництва ДВП в Україні. Власне виробництво, європейська якість.">
+        <span class="cf-slider__label"><img src="../image/pages/uniplyt/logo.svg" alt=""></span>
+      </div>
+      <div class="cf-slider__slide" style="background-color: #c0392b;"
+           data-name="Unibruk" data-url="https://unibruk.com.ua/"
+           data-desc="Тротуарна плитка та бордюри на німецькому обладнанні HESS GROUP.">
+        <span class="cf-slider__label"><img src="../image/pages/unibruk/logo.png" alt=""></span>
+      </div>
+      <div class="cf-slider__slide" style="background-color: #8e6f47;"
+           data-name="Gorgania" data-url="https://gorgania.com.ua/"
+           data-desc="Міжкімнатні двері з серця Карпат. Львів, Київ, Закарпаття.">
+        <span class="cf-slider__label"><img src="../image/pages/gorgania/logo.jpg" alt=""></span>
+      </div>
+      <div class="cf-slider__slide" style="background-color: #34495e;"
+           data-name="Карпатський Трамвай" data-url="https://kartram.com.ua/"
+           data-desc="Єдина діюча вузькоколійна залізниця в Україні. Екскурсії через Карпати.">
+        <span class="cf-slider__label"><img src="../image/pages/karpatTram/logo.svg" alt=""></span>
+      </div>
+      <div class="cf-slider__slide" style="background-color: #e74c8c;"
+           data-name="Соціальні ініціативи" data-url="kompaniya/social.html"
+           data-desc="Благодійність, підтримка громади та ЗСУ. Те, що ми робимо поза виробництвом.">
+        <span class="cf-slider__label"><img src="../image/pages/charity/logo.svg" alt=""></span>
+      </div>
+    </div>
+
+    <!-- Крапки -->
+    <div class="cf-slider__dots">
+      <span class="cf-slider__dot cf-slider__dot--active"></span>
+      <span class="cf-slider__dot"></span>
+      <span class="cf-slider__dot"></span>
+      <span class="cf-slider__dot"></span>
+      <span class="cf-slider__dot"></span>
+    </div>
+
+    <!-- Інфо-блок під слайдером -->
+    <div class="cf-slider__info">
+      <h3 class="cf-slider__name">Uniplyt</h3>
+      <p class="cf-slider__desc">Лідер з виробництва ДВП в Україні. Власне виробництво, європейська якість.</p>
+      <a href="https://uniplyt.com.ua/" target="_blank" class="cf-slider__btn">Детальніше</a>
+    </div>
+  </section>
+
+  <!-- Футер -->
+  <footer class="footer">
+    <span class="footer__name">Uniplyt</span>
+    <a href="tel:+380347761101" class="footer__phone">+38 (03477) 6-11-01</a>
+    <span class="footer__address">м. Вигода, Івано-Франківська обл.</span>
+    <span class="footer__copy">© 2003-2026 ТОВ «Уніплит»</span>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

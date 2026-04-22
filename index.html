@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uniplyt</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Шапка -->
+  <header class="header">
+    <a href="index.html" class="header__logo-link" aria-label="Uniplyt — на головну">
+      <img src="./image/SVG/uniplyt_logo_center_color_from_the_site_015.svg" alt="Логотип Uniplyt" class="header__logo">
+    </a>
+    <div class="header__actions">
+      <select class="lang">
+        <option value="uk">UA</option>
+        <option value="en">EN</option>
+      </select>
+      <button class="burger" aria-label="Меню">
+        <span class="burger__line"></span>
+        <span class="burger__line"></span>
+        <span class="burger__line"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Бургер-меню -->
+  <nav class="menu">
+    <ul class="menu__list">
+      <li class="menu__item menu__item--has-sub">
+        <button class="menu__toggle">
+          <span>Продукція</span>
+          <span class="menu__icon">+</span>
+        </button>
+        <ul class="menu__sub">
+          <li><a href="pages/dvp.html" class="menu__sublink">ДВП</a></li>
+          <li><a href="pages/dvpo.html" class="menu__sublink">ДВПО</a></li>
+          <li><a href="pages/fanera.html" class="menu__sublink">Фанера</a></li>
+          <li><a href="pages/pilomaterialy.html" class="menu__sublink">Пиломатеріали</a></li>
+          <li><a href="pages/brykety.html" class="menu__sublink">Паливні брикети</a></li>
+          <li><a href="pages/dveri.html" class="menu__sublink">Двері</a></li>
+        </ul>
+      </li>
+      <li class="menu__item menu__item--has-sub">
+        <button class="menu__toggle">
+          <span>Компанія</span>
+          <span class="menu__icon">+</span>
+        </button>
+        <ul class="menu__sub">
+          <li><a href="pages/kompaniya/foto.html" class="menu__sublink">Фото виробництва</a></li>
+          <li><a href="pages/kompaniya/social.html" class="menu__sublink">Соціальні ініціативи</a></li>
+          <li><a href="pages/kompaniya/lisokombinat.html" class="menu__sublink">Вигодський лісокомбінат</a></li>
+          <li><a href="pages/kompaniya/finance.html" class="menu__sublink">Фінансова звітність</a></li>
+          <li><a href="pages/kompaniya/yakist.html" class="menu__sublink">Система якості</a></li>
+        </ul>
+      </li>
+      <li class="menu__item menu__item--has-sub">
+        <button class="menu__toggle">
+          <span>Екологія</span>
+          <span class="menu__icon">+</span>
+        </button>
+        <ul class="menu__sub">
+          <li><a href="pages/syrovyna.html" class="menu__sublink">Сировина</a></li>
+          <li><a href="pages/bezpeka.html" class="menu__sublink">Безпека матеріалів</a></li>
+        </ul>
+      </li>
+      <li class="menu__item">
+        <a href="pages/sertyfikaty.html" class="menu__link">Сертифікати</a>
+      </li>
+      <li class="menu__item">
+        <a href="pages/projects.html" class="menu__link">Наші проекти</a>
+      </li>
+      <li class="menu__item">
+        <a href="pages/zakupivli.html" class="menu__link">Закупівлі</a>
+      </li>
+      <li class="menu__item">
+        <a href="pages/contacts.html" class="menu__link">Контакти</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="overlay"></div>
+
+  <!-- Hero — головний екран -->
+  <section class="hero">
+    <div class="hero__content">
+      <p class="hero__label">Лідер галузі</p>
+      <h1 class="hero__title">Виробництво ДВП<br>№1 в Україні</h1>
+      <p class="hero__subtitle">Надійний партнер для вашого бізнесу. Власне виробництво, стабільні поставки, європейська якість.</p>
+      <a href="#products" class="hero__btn">Дізнатись більше</a>
+    </div>
+
+    <!-- Цифри -->
+    <div class="stats">
+      <div class="stats__item">
+        <span class="stats__number" data-target="25">0</span>
+        <span class="stats__unit">років</span>
+        <span class="stats__label">на ринку</span>
+      </div>
+      <div class="stats__item">
+        <span class="stats__number" data-target="12">0</span>
+        <span class="stats__unit">млн м²</span>
+        <span class="stats__label">на рік</span>
+      </div>
+      <div class="stats__item">
+        <span class="stats__number" data-target="500">0</span>
+        <span class="stats__unit">+</span>
+        <span class="stats__label">партнерів</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Група компаній -->
+  <section class="group" id="group">
+    <div class="group__inner">
+
+      <div class="group__head">
+        <span class="group__chip">Група компаній</span>
+        <h2 class="group__title">Більше ніж ДВП — <em>п'ять напрямків однієї команди.</em></h2>
+        <p class="group__subtitle">Uniplyt — це не лише виробництво плит. Навколо головного напрямку виросла ціла екосистема: будматеріали, двері, туризм, соціальні ініціативи. Кожен напрямок відповідає тому ж стандарту якості.</p>
+      </div>
+
+      <div class="group__grid">
+
+        <a href="https://uniplyt.com.ua/" target="_blank" rel="noopener" class="group-card">
+          <div class="group-card__logo group-card__logo--uniplyt">U</div>
+          <h3 class="group-card__name">Uniplyt</h3>
+          <p class="group-card__desc">Лідер з виробництва ДВП в Україні</p>
+        </a>
+
+        <a href="https://unibruk.com.ua/" target="_blank" rel="noopener" class="group-card">
+          <div class="group-card__logo group-card__logo--unibruk">UB</div>
+          <h3 class="group-card__name">Unibruk</h3>
+          <p class="group-card__desc">Тротуарна плитка й бордюри на обладнанні HESS GROUP</p>
+        </a>
+
+        <a href="https://gorgania.com.ua/" target="_blank" rel="noopener" class="group-card">
+          <div class="group-card__logo group-card__logo--gorgania">G</div>
+          <h3 class="group-card__name">Gorgania</h3>
+          <p class="group-card__desc">Міжкімнатні двері з серця Карпат</p>
+        </a>
+
+        <a href="https://kartram.com.ua/" target="_blank" rel="noopener" class="group-card">
+          <div class="group-card__logo group-card__logo--kartram">KT</div>
+          <h3 class="group-card__name">Карпатський Трамвай</h3>
+          <p class="group-card__desc">Єдина діюча вузькоколійна залізниця в Україні</p>
+        </a>
+
+        <a href="pages/kompaniya/social.html" class="group-card">
+          <div class="group-card__logo group-card__logo--social">♥</div>
+          <h3 class="group-card__name">Соціальні ініціативи</h3>
+          <p class="group-card__desc">Благодійність, підтримка громади та ЗСУ</p>
+        </a>
+
+      </div>
+
+      <a href="pages/projects.html" class="group__link">Докладніше про всі напрямки →</a>
+
+    </div>
+  </section>
+
+  <!-- Футер -->
+  <footer class="footer">
+    <!-- Контакти -->
+    <div class="footer__contacts">
+      <h3 class="footer__heading">Контакти</h3>
+      <ul class="footer__contacts-list">
+        <li>
+          <a href="tel:+380347761101" class="footer__contact-link">
+            <span class="footer__contact-label">Телефон</span>
+            <span class="footer__contact-value">+38 (03477) 6-11-01</span>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:uniplytsales@gmail.com" class="footer__contact-link">
+            <span class="footer__contact-label">Продажі</span>
+            <span class="footer__contact-value">uniplytsales@gmail.com</span>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:secretar@uniplyt.com.ua" class="footer__contact-link">
+            <span class="footer__contact-label">Секретаріат</span>
+            <span class="footer__contact-value">secretar@uniplyt.com.ua</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="footer__contact-link" target="_blank" rel="noopener">
+            <span class="footer__contact-label">Адреса</span>
+            <span class="footer__contact-value">м. Вигода, Івано-Франківська обл.</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Нижняя часть -->
+    <div class="footer__bottom">
+      <span class="footer__legal">ТОВ «Уніплит» · ЄДРПОУ 30905968</span>
+      <span class="footer__copy">© 2003-2026 Усі права захищені</span>
+      <a href="#" class="footer__privacy">Політика конфіденційності</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
