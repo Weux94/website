@@ -129,24 +129,38 @@ if (productsTrack && productsDots.length > 0) {
     if (nextArrow) nextArrow.disabled = activeIndex === productCards.length - 1;
   };
 
-  // При скроллі — визначаємо яка карточка в центрі viewport і підсвічуємо відповідну точку
+  // При скроллі — визначаємо який індекс активний і підсвічуємо відповідну точку
   const updateActiveDot = () => {
-    const trackRect = productsTrack.getBoundingClientRect();
-    const trackCenter = trackRect.left + trackRect.width / 2;
+    const scrollLeft = productsTrack.scrollLeft;
+    const maxScroll = productsTrack.scrollWidth - productsTrack.clientWidth;
 
-    let closestIndex = 0;
-    let closestDistance = Infinity;
+    let closestIndex;
 
-    productCards.forEach((card, i) => {
-      const cardRect = card.getBoundingClientRect();
-      const cardCenter = cardRect.left + cardRect.width / 2;
-      const distance = Math.abs(cardCenter - trackCenter);
+    // Крайові випадки: якщо у самому початку або в самому кінці — фіксуємо перший/останній індекс явно.
+    // Без цього на широкому десктопі остання карточка ніколи не буде "в центрі" (за неї нема куди скролити),
+    // і алгоритм "closest to center" залипає на передостанній карточці.
+    if (scrollLeft <= 1) {
+      closestIndex = 0;
+    } else if (scrollLeft >= maxScroll - 1) {
+      closestIndex = productCards.length - 1;
+    } else {
+      // Середина ленти — беремо карточку, найближчу до центру viewport
+      const trackRect = productsTrack.getBoundingClientRect();
+      const trackCenter = trackRect.left + trackRect.width / 2;
+      let closestDistance = Infinity;
+      closestIndex = 0;
 
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closestIndex = i;
-      }
-    });
+      productCards.forEach((card, i) => {
+        const cardRect = card.getBoundingClientRect();
+        const cardCenter = cardRect.left + cardRect.width / 2;
+        const distance = Math.abs(cardCenter - trackCenter);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = i;
+        }
+      });
+    }
 
     activeIndex = closestIndex;
 
@@ -183,6 +197,62 @@ if (productsTrack && productsDots.length > 0) {
 
   // Початковий стан стрілок — попередня неактивна, бо стартуємо з першої карточки
   updateArrowsState();
+
+
+  // ---- Drag-to-scroll мишкою (десктоп) ----
+  // Коли юзер тисне і тягне мишкою — лента скролиться, як при свайпі на телефоні.
+  // Складність: треба не плутати перетягування з кліком по лінку всередині карточки.
+
+  let isMouseDown = false;
+  let dragStartX = 0;
+  let dragStartScroll = 0;
+  let hasDragged = false;
+
+  // При мishdown запам'ятовуємо старт
+  productsTrack.addEventListener('mousedown', (e) => {
+    // Якщо юзер натиснув прямо по лінку/кнопці — не перехоплюємо
+    if (e.target.closest('a, button')) return;
+
+    isMouseDown = true;
+    hasDragged = false;
+    dragStartX = e.pageX;
+    dragStartScroll = productsTrack.scrollLeft;
+
+    // Під час перетягування тимчасово вимикаємо snap — щоб не було "дергання" на кожному кроці
+    productsTrack.style.scrollSnapType = 'none';
+  });
+
+  // Під час руху — рахуємо зміщення і скролимо вручну
+  productsTrack.addEventListener('mousemove', (e) => {
+    if (!isMouseDown) return;
+
+    const dx = e.pageX - dragStartX;
+    // 5 пікселів — поріг "це вже точно drag, а не випадковий мishдвиг"
+    if (Math.abs(dx) > 5) {
+      hasDragged = true;
+      e.preventDefault();
+      productsTrack.scrollLeft = dragStartScroll - dx;
+    }
+  });
+
+  // Завершення перетягування — повертаємо snap, і він сам доїде до найближчої карточки
+  const endDrag = () => {
+    if (!isMouseDown) return;
+    isMouseDown = false;
+    productsTrack.style.scrollSnapType = '';
+  };
+
+  productsTrack.addEventListener('mouseup', endDrag);
+  productsTrack.addEventListener('mouseleave', endDrag);
+
+  // Якщо юзер перетягнув — блокуємо click, що прилетить після mouseup (інакше браузер відкриє лінк)
+  productsTrack.addEventListener('click', (e) => {
+    if (hasDragged) {
+      e.preventDefault();
+      e.stopPropagation();
+      hasDragged = false;
+    }
+  }, true);
 }
 
 
